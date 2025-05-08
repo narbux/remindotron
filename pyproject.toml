@@ -1,0 +1,32 @@
+[project]
+name = "remindotron"
+version = "0.1.0"
+description = "Save reminders and notify about them every day"
+license = "GPL-3.0-or-later"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "gotify>=0.6.0",
+    "pydantic>=2.11.4",
+    "python-dateutil>=2.9.0.post0",
+    "python-dotenv>=1.1.0",
+    "rich>=14.0.0",
+    "sqlalchemy>=2.0.40",
+]
+
+[project.scripts]
+remindotron = "remindotron.remindotron:main"
+
+[dependency-groups]
+dev = [
+    "mypy>=1.15.0",
+    "pytest>=8.3.5",
+    "types-python-dateutil>=2.9.0.20241206",
+]
+
+[tool.uv]
+package = true
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
