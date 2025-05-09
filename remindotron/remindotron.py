@@ -149,16 +149,21 @@ def send_gotify_notification(reminders: list[Reminder]) -> None:
         raise SystemExit(1)
     gotify = Gotify(base_url=GOTIFY_URL, app_token=GOTIFY_APP_TOKEN)
     message = f"**{str(datetime.now().strftime('%d-%m-%Y'))}**\n\n"
+    priority_calc = []
     for reminder in reminders:
         if reminder.category:
             message += (
                 f"- {reminder.category.name.capitalize()}: {reminder.name}\n\n"
             )
+            priority_calc.append(reminder.priority)
 
     extras = {"client::display": {"contentType": "text/markdown"}}
 
     gotify.create_message(
-        message=message, title="Reminders for today", priority=0, extras=extras
+        message=message,
+        title="Reminders for today",
+        priority=(int(sum(priority_calc) / len(priority_calc))),
+        extras=extras,
     )
 
 
