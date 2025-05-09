@@ -59,7 +59,7 @@ class Reminder(Base):
     name: Mapped[str] = mapped_column(nullable=False)
     description: Mapped[Optional[str]] = mapped_column(default=None)
     date: Mapped[DTDate] = mapped_column(nullable=False)
-    priority: Mapped[Optional[int]] = mapped_column(default=0)
+    priority: Mapped[Optional[int]] = mapped_column(default=5)
     recurring: Mapped[Recurring] = mapped_column(
         SQLAlchemyEnum(Recurring), default=Recurring.YEARLY
     )
