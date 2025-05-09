@@ -15,8 +15,6 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>."""
 
-__version__ = "0.1.0"
-
 import argparse
 import logging
 import os
@@ -40,6 +38,7 @@ from sqlalchemy.orm import (
     sessionmaker,
 )
 
+from remindotron import __version__
 from remindotron.logging import get_logger
 from remindotron.models import Base, Recurring, Reminder, ReminderCategory
 
