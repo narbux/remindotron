@@ -196,7 +196,7 @@ def handle_cron_hit(reminders: list[Reminder]) -> None:
                         result.date = item.date + relativedelta(years=1)
                     case _:
                         logger.error("item.recurring not found in Enum")
-                        raise ValueError("item.recurring not in Enum")
+                        raise ValueError("item.recurring not found in Enum")
 
                 # UPDATE LAST_OCCURRENCE
                 result.last_occurrence = datetime.now()
@@ -250,7 +250,7 @@ def check_or_create_db(db_path: Path) -> bool:
             db_path.touch(exist_ok=True)
             just_created = True
         except Exception as e:
-            logger.error(
+            logger.critical(
                 f"Error: Cannot create or access database file at {db_path}"
             )
             raise SystemExit(1) from e
@@ -261,12 +261,12 @@ def check_or_create_db(db_path: Path) -> bool:
             if (
                 header and header != b"SQLite format 3\x00"
             ):  # Check if the file is a valid SQLite file (if it's not empty)
-                logger.error(
-                    f"Error: File at {db_path} exists and is not a valid SQLite database."
+                logger.critical(
+                    f"File at {db_path} exists and is not a valid SQLite database."
                 )
                 raise SystemExit(1)
     except Exception as e:
-        logger.error(f"Error while checking SQLite header: {e}")
+        logger.critical(f"Error while checking SQLite header: {e}")
         raise SystemExit(1) from e
 
     return just_created
