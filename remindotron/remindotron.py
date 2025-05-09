@@ -237,6 +237,14 @@ def check_or_create_db(db_path: Path) -> bool:
     just_created = False
 
     if not db_path.exists():
+        answer = Confirm.ask(
+            f"Database doesn't seem to exist, do you want to create it at {db_path}?"
+        )
+        if not answer:
+            logger.critical(
+                "Can't continue without a database, add --database option to command or create a new database."
+            )
+            raise SystemExit(1)
         try:
             db_path.parent.mkdir(parents=True, exist_ok=True)
             db_path.touch(exist_ok=True)
