@@ -1,6 +1,6 @@
 [project]
 name = "remindotron"
-version = "0.1.0"
+version = "0.1.1"
 description = "Save reminders and notify about them every day"
 license = "GPL-3.0-or-later"
 readme = "README.md"
