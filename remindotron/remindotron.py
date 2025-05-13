@@ -316,7 +316,8 @@ WantedBy=default.target
 Description=Run Remindotron daily
 
 [Timer]
-OnCalendar=*-*-* 10:00
+OnCalendar=Mon..Fri 08:30
+OnCalendar=Sat,Sun 11:00
 Persistent=True
 
 [Install]
