@@ -28,6 +28,7 @@ from sqlalchemy.sql import func
 
 
 class Recurring(StrEnum):
+    ONCE = "once"
     DAILY = "daily"
     WEEKLY = "weekly"
     MONTHLY = "monthly"

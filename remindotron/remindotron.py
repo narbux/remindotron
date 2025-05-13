@@ -183,6 +183,8 @@ def handle_cron_hit(reminders: list[Reminder]) -> None:
 
                 # UPDATE DATE ACCORDING TO RECURRING VALUE
                 match item.recurring:
+                    case Recurring.ONCE:
+                        pass
                     case Recurring.DAILY:
                         result.date = item.date + relativedelta(days=1)
                     case Recurring.WEEKLY:
