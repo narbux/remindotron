@@ -48,10 +48,8 @@ GOTIFY_URL = os.getenv("GOTIFY_URL")
 GOTIFY_APP_TOKEN = os.getenv("GOTIFY_APP_TOKEN")
 console = Console()
 logger = get_logger()
-httpx_logger = logging.getLogger("httpx")
-httpx_logger.setLevel(logging.INFO)
-httpcore_logger = logging.getLogger("httpcore")
-httpcore_logger.setLevel(logging.INFO)
+logging.getLogger("httpx").setLevel(logging.INFO)
+logging.getLogger("httpcore").setLevel(logging.INFO)
 
 
 ### MAIN FUNCTIONS ###
