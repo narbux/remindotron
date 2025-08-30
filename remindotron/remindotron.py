@@ -46,6 +46,9 @@ from remindotron.models import Base, Recurring, Reminder, ReminderCategory
 load_dotenv(".env")
 GOTIFY_URL = os.getenv("GOTIFY_URL")
 GOTIFY_APP_TOKEN = os.getenv("GOTIFY_APP_TOKEN")
+DATABASE_LOCATION = os.getenv("DATABASE_LOCATION")
+
+
 console = Console()
 logger = get_logger()
 logging.getLogger("httpx").setLevel(logging.INFO)
@@ -371,14 +374,6 @@ def get_arguments() -> dict[str, Any]:
         help="show version",
     )
     parser.add_argument(
-        "--database",
-        action="store",
-        type=Path,
-        default=(Path.cwd() / "remindotron.db"),
-        help="path to database to use [default: ./remindotron.db]",
-        metavar="/path/to/db",
-    )
-    parser.add_argument(
         "--debug",
         action="store_true",
         help="show debug information",
@@ -442,12 +437,14 @@ def main() -> None:
         logger.debug("Debug mode enabled")
 
     ### Check and setup database ###
-    db_path = Path(arguments["database"]).expanduser().resolve()
+    if not DATABASE_LOCATION:
+        raise ValueError("Could not find database location in environment")
+    db_path = Path(DATABASE_LOCATION).expanduser().resolve()
     empty_database = check_or_create_db(db_path)
 
     global Session
     engine = create_engine(
-        url=f"sqlite:///{arguments['database']}?journal_mode=wal",
+        url=f"sqlite:///{db_path}?journal_mode=wal",
         echo=arguments["debug"],
     )
     Session = sessionmaker(bind=engine)
