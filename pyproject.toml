@@ -1,6 +1,6 @@
 [project]
 name = "remindotron"
-version = "0.1.1"
+version = "0.2.0"
 description = "Save reminders and notify about them every day"
 license = "GPL-3.0-or-later"
 readme = "README.md"
@@ -21,11 +21,7 @@ dependencies = [
 remindotron = "remindotron.remindotron:main"
 
 [dependency-groups]
-dev = [
-    "mypy>=1.15.0",
-    "pytest>=8.3.5",
-    "types-python-dateutil>=2.9.0.20241206",
-]
+dev = ["mypy>=1.15.0", "pytest>=8.3.5", "types-python-dateutil>=2.9.0.20241206"]
 
 [tool.uv]
 package = true
